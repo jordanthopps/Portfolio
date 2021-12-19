@@ -751,7 +751,6 @@
   RenderApiData("blog2", data[1]);
   RenderApiData("blog3", data[2]);
   });
-
   });
 
 
@@ -772,7 +771,7 @@
 
   let image = document.querySelector(`#${id} > a > img`);
   let imageData = `data:${data.contentType};base64,${data.imageData}`;
-  image.setAttribue("src", imageData);
+  image.setAttribute("src", imageData);
 
   //Display the abstract
   let abstract = document.querySelector(`#${id} > div.card-body > p`);
