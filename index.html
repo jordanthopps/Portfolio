@@ -34,6 +34,7 @@
   <link href="/css/custom.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
+  
   <link rel="stylesheet" href="/css/style.css">
 
 </head>
@@ -260,9 +261,9 @@
 
 <div class="row">
   <div class="card-group">
-    <div  class="card">
+    <div id="blog1" class="card">
       <img src="..." class="card-img-top" alt="...">
-      <div id="blog1" class="card-body">
+      <div class="card-body">
         <h5 class="card-title">
           <a></a>
         </h5>
@@ -753,13 +754,13 @@ function RenderApiData(id, data)
 //Build a link out to the Blog details page for each of the incoming blogs
 //https://heroku-shadow-blog.herokuapp.com/JordansBlog/PostDetails/brass-tacks-apie
 let blogLink = `//heroku-shadow-blog.herokuapp.com/JordansBlog/PostDetails/${data.slug}`;
-}
 
 //Next I want to use the Title data
 let anchorText = document.querySelector(`#${id} > div.card-body > h5 > a`);
 anchorText.text = data.title;
 anchorText.setAttribute("href", blogLink); 
 
+}
 </script>
 
 </body>
