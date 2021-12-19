@@ -269,7 +269,7 @@
         <h5 class="card-title">
           <a target="_blank"></a>
         </h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"></p>
       </div>
       <div class="card-footer">
         <small class="text-muted">Last updated 3 mins ago</small>
@@ -283,7 +283,7 @@
         <h5 class="card-title">
           <a target="_blank"></a>
         </h5>
-        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+        <p class="card-text"></p>
       </div>
       <div class="card-footer">
         <small class="text-muted">Last updated 3 mins ago</small>
@@ -297,7 +297,7 @@
         <h5 class="card-title">
           <a target="_blank"></a>
         </h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+        <p class="card-text"></p>
       </div>
       <div class="card-footer">
         <small class="text-muted">Last updated 3 mins ago</small>
@@ -739,44 +739,46 @@
   <!-- Template Main JS File -->
   <script src="/js/main.js"></script>
 
-<script>
-//Write the code that hits my GetTopXPosts endpoint
-//and uses the data that comes back to populate the Blog section
+  <script>
+  //Write the code that hits my GetTopXPosts endpoint
+  //and uses the data that comes back to populate the Blog section
 
-document.addEventListener("DOMContentLoaded", function() {
-fetch('https://heroku-shadow-blog.herokuapp.com/GetTopXPosts/3')
-.then(response => response.json())
-.then(function(data) {
-RenderApiData("blog1", data[0]);
-RenderApiData("blog2", data[1]);
-RenderApiData("blog3", data[2]);
-});
+  document.addEventListener("DOMContentLoaded", function() {
+  fetch('https://heroku-shadow-blog.herokuapp.com/GetTopXPosts/3')
+  .then(response => response.json())
+  .then(function(data) {
+  RenderApiData("blog1", data[0]);
+  RenderApiData("blog2", data[1]);
+  RenderApiData("blog3", data[2]);
+  });
 
-});
+  });
 
 
-function RenderApiData(id, data)
-{
-//Build a link out to the Blog details page for each of the incoming blogs
-//https://heroku-shadow-blog.herokuapp.com/JordansBlog/PostDetails/brass-tacks-apie
-let blogLink = `//heroku-shadow-blog.herokuapp.com/JordansBlog/PostDetails/${data.slug}`;
+  function RenderApiData(id, data)
+  {
+  //Build a link out to the Blog details page for each of the incoming blogs
+  //https://heroku-shadow-blog.herokuapp.com/JordansBlog/PostDetails/brass-tacks-apie
+  let blogLink = `//heroku-shadow-blog.herokuapp.com/JordansBlog/PostDetails/${data.slug}`;
 
-//Next I want to use the Title data
-let anchorText = document.querySelector(`#${id} > div.card-body > h5 > a`);
-anchorText.text = data.title;
-anchorText.setAttribute("href", blogLink); 
+  //Next I want to use the Title data
+  let anchorText = document.querySelector(`#${id} > div.card-body > h5 > a`);
+  anchorText.text = data.title;
+  anchorText.setAttribute("href", blogLink); 
 
-//Now deal with the blog post image
-let anchorImage = document.querySelector(`#${id} > a`);
-anchorImage.setAttribute("href", blogLink);
+  //Now deal with the blog post image
+  let anchorImage = document.querySelector(`#${id} > a`);
+  anchorImage.setAttribute("href", blogLink);
 
-let image = document.querySelector(`#${id} > a > img`);
-let imageData = `data:${data.contentType};base64,${data.imageData}`;
-image.setAttribue("src", imageData);
+  let image = document.querySelector(`#${id} > a > img`);
+  let imageData = `data:${data.contentType};base64,${data.imageData}`;
+  image.setAttribue("src", imageData);
 
-}
-</script>
+  //Display the abstract
+  let abstract = document.querySelector(`#${id} > div.card-body > p`);
+  abstract.text = data.abstract;
+  }
+  </script>
 
-</body>
-
+  </body>
 </html>
