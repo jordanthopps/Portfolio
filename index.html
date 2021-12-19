@@ -747,7 +747,7 @@
 //  Written to hit my GetTopXPosts endpoint and use the return  
 //  data to populate a few BootStrap 5 img-top cards
 /***************************************************************/
-let apiBaseUrl = 'https://heroku-shadow-blog.herokuapp.com/'; 
+let apiBaseUrl = 'https://heroku-shadow-blog.herokuapp.com'; 
 let PopulateBlogCards = () => {
     fetch(`${apiBaseUrl}/GetTopXPosts/3`)
     .then(response => response.json())
@@ -764,7 +764,7 @@ let RenderApiData = (id, data) => {
   let cardBody = card.querySelector('div.card-body');
   //Step 2: Setup a few pieces of data that will be used throughout the card
   let imageData = `data:${data.imageType};base64,${data.imageData}`;
-  let blogLink = `${apiBaseUrl}/JordansBlog/PostDetails/?slug=${data.slug}`;
+  let blogLink = `${apiBaseUrl}/JordansBlog/PostDetails/${data.slug}`;
   //Step 3: Manage the card Image
   let cardImage = card.querySelector('a > img');
   cardImage.setAttribute("src", imageData);
