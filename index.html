@@ -740,43 +740,49 @@
   <script src="/js/main.js"></script>
 
   <script>
-  //Write the code that hits my GetTopXPosts endpoint
-  //and uses the data that comes back to populate the Blog section
-
-  document.addEventListener("DOMContentLoaded", function() {
-  fetch('https://heroku-shadow-blog.herokuapp.com/GetTopXPosts/3')
-  .then(response => response.json())
-  .then(function(data) {
-  RenderApiData("blog1", data[0]);
-  RenderApiData("blog2", data[1]);
-  RenderApiData("blog3", data[2]);
-  });
-  });
-
-
-  function RenderApiData(id, data)
-  {
-  //Build a link out to the Blog details page for each of the incoming blogs
-  //https://heroku-shadow-blog.herokuapp.com/JordansBlog/PostDetails/brass-tacks-apie
-  let blogLink = `https://heroku-shadow-blog.herokuapp.com/JordansBlog/PostDetails/${data.slug}`;
-
-  //Next I want to use the Title data
-  let anchorText = document.querySelector(`#${id} > div.card-body > h5 > a`);
-  anchorText.text = data.title;
-  anchorText.setAttribute("href", blogLink); 
-
-  //Now deal with the blog post image
-  let anchorImage = document.querySelector(`#${id} > a`);
-  anchorImage.setAttribute("href", blogLink);
-
-  let image = document.querySelector(`#${id} > a > img`);
-  let imageData = `data:${data.contentType};base64,${data.imageData}`;
-  image.setAttribute("src", imageData);
-
-  //Display the abstract
-  let abstract = document.querySelector(`#${id} > div.card-body > p`);
-  abstract.text = data.abstract;
-  }
+/***************************************************************/
+// Name: blogapi.js
+// Created: 12/16/21
+// Description: 
+//  Written to hit my GetTopXPosts endpoint and use the return  
+//  data to populate a few BootStrap 5 img-top cards
+/***************************************************************/
+let apiBaseUrl = 'https://heroku-shadow-blog.herokuapp.com/'; 
+let PopulateBlogCards = () => {
+    fetch(`${apiBaseUrl}/GetTopXPosts/3`)
+    .then(response => response.json())
+    .then(function(data) {
+      RenderApiData("blog1", data[0]);
+      RenderApiData("blog2", data[1]);
+      RenderApiData("blog3", data[2]);
+    });  
+};
+let RenderApiData = (id, data) => {
+    
+  //Step 1: Get references to the card and card body 
+  let card = document.querySelector(`#${id}`);
+  let cardBody = card.querySelector('div.card-body');
+  //Step 2: Setup a few pieces of data that will be used throughout the card
+  let imageData = `data:${data.imageType};base64,${data.imageData}`;
+  let blogLink = `${apiBaseUrl}/BlogPosts/Details?slug=${data.slug}`;
+  //Step 3: Manage the card Image
+  let cardImage = card.querySelector('a > img');
+  cardImage.setAttribute("src", imageData);
+  //Step 4: Manage the card Image link
+  let imgLink = card.querySelector('a');
+  imgLink.setAttribute("href", blogLink);
+  //Step 5: Manage the card body Title link  
+  let bodyTitleLink = cardBody.querySelector('h5 > a');
+  bodyTitleLink.text = data.title;
+  bodyTitleLink.setAttribute("href", blogLink);
+  //Step 6: Manage the abstract text
+  cardBody.querySelector('p').innerText = data.abstract;
+  //Step 7: Manage the footer text
+  let footerText = card.querySelector('div.card-footer > small');
+  let createdDate = new Date(data.created).toDateString();
+  footerText.innerHTML = `<b>Created:</b> ${createdDate}`
+};
+document.addEventListener("DOMContentLoaded", PopulateBlogCards);
   </script>
 
   </body>
