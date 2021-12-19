@@ -262,10 +262,12 @@
 <div class="row">
   <div class="card-group">
     <div id="blog1" class="card">
-      <img src="..." class="card-img-top" alt="...">
+      <a>
+        <img src="..." class="card-img-top" alt="...">
+      </a>
       <div class="card-body">
         <h5 class="card-title">
-          <a></a>
+          <a target="_blank"></a>
         </h5>
         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
       </div>
@@ -274,10 +276,12 @@
       </div>
     </div>
     <div id="blog2" class="card">
-      <img src="..." class="card-img-top" alt="...">
+      <a>
+        <img src="..." class="card-img-top" alt="...">
+      </a>
       <div class="card-body">
         <h5 class="card-title">
-          <a></a>
+          <a target="_blank"></a>
         </h5>
         <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
       </div>
@@ -286,10 +290,12 @@
       </div>
     </div>
     <div id="blog3" class="card">
-      <img src="..." class="card-img-top" alt="...">
+      <a>
+        <img src="..." class="card-img-top" alt="...">
+      </a>
       <div class="card-body">
         <h5 class="card-title">
-          <a></a>
+          <a target="_blank"></a>
         </h5>
         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
       </div>
@@ -759,6 +765,14 @@ let blogLink = `//heroku-shadow-blog.herokuapp.com/JordansBlog/PostDetails/${dat
 let anchorText = document.querySelector(`#${id} > div.card-body > h5 > a`);
 anchorText.text = data.title;
 anchorText.setAttribute("href", blogLink); 
+
+//Now deal with the blog post image
+let anchorImage = document.querySelector(`#${id} > a`)
+anchorImage.setAttribute("href", blogLink);
+
+let image = document.querySelector(`#${id} > a > img`);
+let imageData = `data:${data.contentType};base64,${data.imageData}`;
+image.setAttribue("src", imageData);
 
 }
 </script>
