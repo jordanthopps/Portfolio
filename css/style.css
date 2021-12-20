@@ -246,12 +246,12 @@ h6 {
 #hero {
   width: 100%;
   height: 100vh;
-  background: url("../img/HeroBackground.png") top center;
+  background: url("../img/HeroBackground\ 2.png") top center;
   background-size: cover;
 }
 
 /*darkening film*/
-#hero:before {
+/* #hero:before {
   content: "";
   background: rgba(5, 13, 24, 0.3);
   position: absolute;
@@ -260,7 +260,7 @@ h6 {
   left: 0;
   right: 0;
   z-index: 1;
-}
+} */
 
 #hero .hero-container {
   position: relative;
